@@ -1,0 +1,22 @@
+<div class="remodal" remodal="modal" ng-model="application">
+	<h1>Save your application</h1>
+	<p ng-if="!application.confirmed_pin">Confirm your PIN to save your application &amp; finish later. We sent it in a SMS to <strong>[[application.client_username || application.mobile]]</strong>. If that's not right <a ng-click="openChangeNumberModal()" class="change-mobile">change your mobile number</a> now. If you don't receive it,&nbsp;<a href="/contact" target="_blank">let us know</a>.</p>
+	<br>
+	<form name="finishLaterForm" id="finish-later-form" class="form-modal" novalidate>
+		<div class="form-group col-sm-10 block-center" id="group-pin">
+			<div class="row">
+				<div class="field-container col-sm-5" ng-if="!application.confirmed_pin">
+					<input validate type="password" ng-model="updateData.pin" name="pin" class="form-control" placeholder="Enter your PIN" maxlength="4" required>
+				</div>
+				<div ng-switch on="application.confirmed_pin" class="field-container col-sm-7" ng-class="{'block-center' : application.confirmed_pin , 'pull-right' : !application.confirmed_pin}">
+					<button type="submit" id="check-pin" ng-switch-when="true" ng-click="submitModalForm(finishLaterForm, 'save')" class="btn-submit"><span>Save &amp; finish later</span></button>
+					<button type="submit" id="check-pin" ng-switch-default ng-click="submitModalForm(finishLaterForm, 'confirm')" class="btn-submit"><span>Save &amp; finish later</span></button>
+				</div>
+			</div>
+			<div class="field-errors" show-error-message>
+				<div class="field-error" data-input-name="pin" ng-if="fieldError.pin">[[fieldError.pin]]</div>
+				<div class="field-success" data-input-name="pin" ng-if="fieldSuccess.pin">[[fieldSuccess.pin]]</div>
+			</div>
+		</div>
+	</form>
+</div>

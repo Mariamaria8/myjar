@@ -1,0 +1,40 @@
+<section class="sec-borrow vantage-request" ng-controller="ClientOverviewController">
+	<div class="container">
+		<div class="request-body">
+			<div class="request-header text-center">
+				<h1>Borrow for up to <br />3 months</h1>
+				<p class="pb5">Repay monthly on your pay day or earlier if it suits you</p>
+				<p>Rate <strong>0.8%</strong> per day</p>
+			</div>
+
+			<!-- Vantage request body -->
+			<div ng-include src="partialsFolder + 'client/overview/sections/vantage/request/borrow_body.html'"></div>
+
+			<div class="schedule-body">
+				<div class="schedule-container">
+					<h2>Payment schedule</h2>
+					<div class="borrow-container text-center">
+						<p>Borrow <strong>[[loanRequestInfo.principal | currency:"£"]]</strong> Interest <strong>[[loanRequestInfo.interest | currency:"£"]]</strong></p>
+						<p><strong>Total to repay: [[loanRequestInfo.total() | currency:"£"]]</strong></p>
+						<button ng-disabled="borrowButtonDisabled" ng-click="openRequestConfirmModal()" class="submit-button btn-black"><span>Borrow</span><b>></b></button>
+					</div>
+					<!-- Vantage request instalments container -->
+					<div class="instalment-container" ng-include src="partialsFolder + 'client/overview/sections/vantage/request/instalment_container.html'"></div>
+				</div>
+				<div class="important-information">
+					<h2>Important information</h2>
+					<ul>
+						<li>• Interest of <strong>0.8%</strong> per day</li>
+						<li>• We will collect payment by debit card on the dates set out in the schedule above</li>
+						<li>• If you are late in paying an additional charge of <strong>£15</strong> may be added</li>
+						<li>• Repay early in full or in part and only pay for the days you borrow</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="need-info text-center">
+			<h2 class="white">Need more info?</h2>
+			<h2 class="black">Call: 020 3006 2000</h2>
+		</div>
+	</div>
+</section>

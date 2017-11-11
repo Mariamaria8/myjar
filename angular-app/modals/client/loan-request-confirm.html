@@ -1,0 +1,38 @@
+<div class="remodal request-confirm-modal" remodal="modal">
+	<div class="inner-container">
+		<div class="schedule-container">
+			<h2>Payment schedule</h2>
+			<table class="payment-schedule">
+				<thead>
+					<tr>
+						<th class="instalment">Instalment</th>
+						<th class="duedate">Due date</th>
+						<th class="repay">Repay</th>
+					</tr>
+				</head>
+				<tbody>
+					<tr ng-repeat="instalment in requestData.instalments">
+						<td class="text-center">[[$index + 1]]</td>
+						<td class="text-center">[[instalment.date | instalmentDateFormat]]</td>
+						<td class="text-center">[[instalment.showAmount | currency:"£"]]</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="borrow-container text-center">
+				<p>Borrow <strong>[[requestData.summary.principal | currency:"£"]]</strong> Interest <strong>[[requestData.summary.interest | currency:"£"]]</strong></p>
+				<p><strong>Total to repay: [[requestData.summary.total() | currency:"£"]]</strong></p>
+			</div>
+		</div>
+		<div class="info-container">
+			<div class="borrow-container text-center">
+				<button ladda="requestLoading" ng-disabled="borrowButtonDisabled" ng-click="requestLoanSchedule()" class="submit-button btn-black"><span>Borrow</span><b>></b></button>
+			</div>
+			<ul>
+				<li>• Interest of <strong>0.8%</strong> per day</li>
+				<li>• We will collect payment by debit card on the dates set out in the schedule above</li>
+				<li>• If you are late in paying an additional charge of <strong>£15</strong> may be added</li>
+				<li>• Repay early in full or in part and only pay for the days you borrow</li>
+			</ul>
+		</div>
+	</div>
+</div>

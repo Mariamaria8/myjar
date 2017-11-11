@@ -1,0 +1,36 @@
+<div class="remodal example-loan-vantage" data-remodal-id="modal">
+	<div class="example-loan-header">
+		<h2>Example loan</h2>
+	</div>
+	<div class="vantage-request">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="request-body volante">
+					<div class="row">
+						<div class="col-md-6">
+							<!-- Vantage request left body -->
+							<div ng-include src="partialsFolder + 'client/overview/sections/vantage/request/borrow_body.html'"></div>
+						</div>
+						<div class="col-md-6">
+							<div class="schedule-body">
+								<div class="schedule-container">
+									<h2>Example payment schedule*</h2>
+									<!-- Vantage request right body instalments -->
+									<div class="instalment-container" ng-include src="partialsFolder + 'client/overview/sections/vantage/request/instalment_container.html'"></div>
+
+									<div class="borrow-container text-center">
+										<p>Borrow <strong>[[loanRequestInfo.principal | currency:"£"]]</strong> Interest <strong>[[loanRequestInfo.interest | currency:"£"]]*</strong></p>
+										<p><strong>Total to repay: [[loanRequestInfo.total() | currency:"£"]]*</strong></p>
+										<div class="disclaimer">
+											*Amounts and instalment dates may differ slightly in the final loan offer as we collect payment monthly on your pay date
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

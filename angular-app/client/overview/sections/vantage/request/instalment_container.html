@@ -1,0 +1,17 @@
+<div class="instalment-boxes" vertical-align="instalment-boxes">
+	<ul ng-if="instalments.length > 0">
+		<li class="instal-box" ng-repeat="instalment in instalments">
+			<div class="pull-left number-box">
+				[[$index + 1]]
+			</div>
+			<div class="pull-left info-box">
+				<dl>
+					<dt>Repay:</dt>
+					<dd><strong>[[instalment.showAmount | currency:"£"]]</strong></dd>
+					<dt>Due:</dt>
+					<dd><strong>[[instalment.date | instalmentDateFormat]]</strong></dd>
+				</dl>
+			</div>
+		</li>
+	</ul>
+</div>

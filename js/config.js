@@ -1,0 +1,1 @@
+var config = {csrf_token: "QzpNvSu4Z4FOCIntITb17tNnF5VjLHIEh0AjbaLG",assetFolder: "/core-assets",mobile: "",client_data: [],};

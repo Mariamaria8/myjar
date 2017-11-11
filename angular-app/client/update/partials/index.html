@@ -1,0 +1,85 @@
+<section class="sec-borrow update-details" ng-controller="ClientUpdateController">
+	<div class="container" ng-if="inputDataLoaded">
+		<div class="row">
+			<div class="col-md-6 block-center">
+				<div class="update-header text-center">
+					<h2>Hi [[client_data.firstname]] <br>want to borrow ?</h2>
+					<p ng-show="updateFields.length > 0">Please update the fields below</p>
+				</div>
+			</div>
+		</div>
+
+		<form name="affordabilityQuestionsForm" class="angular-form" novalidate ng-controller="ClientUpdateFormController">
+			<div class="row">
+				<div class="col-md-6 block-center">
+					<div class="form-group" id="group-paydate" show-helper ng-if="updateFields.next_income_date">
+						<label>Next pay date</label>
+						<div class="field-container w-helper">
+							<input validate date-selection="paydate" type="text" name="next_income_date" id="paydate" data-format="DD-MM-YYYY" data-template="D MMM YYYY" ng-model="update.next_income_date" watch-model="next_income" required>
+							<a href="#" class="field-helper cal" ng-model="next_income" mobiscroll-calendar="calendarOptions.paydate" mobiscroll-selector watch-model="update.client_employment_next_income"></a>
+						</div>
+						<div class="field-errors" show-error-message></div>
+					</div>
+					<div class="form-group" id="group-payment_frequency" show-helper ng-if="updateFields.client_employment_income_frequency">
+						<label>How often do you get paid?</label>
+						<div class="field-container">
+							<div validate helper="true" ng-model="update.client_employment_income_frequency" select-application-group="client_employment_income_frequency" section="income">
+							</div>
+						</div>
+						<div class="field-errors" show-error-message></div>
+					</div>
+					<div class="form-group" id="group-employer_length" show-helper ng-if="updateFields.client_employment_monthly_income">
+						<label>Monthly income</label>
+						<div class="field-container">
+							<div validate helper="true" ng-model="update.client_employment_monthly_income" select-application-group="client_employment_monthly_income" required section="income"></div>
+						</div>
+						<div class="helper-message" ng-if="helperMessage.active">Choose the amount that is closest to your take home pay after tax has been deducted.</div>
+						<div class="field-errors" show-error-message></div>
+					</div>
+					<div class="form-group" id="group-adults" show-helper ng-if="updateFields.client_detail_no_of_adults">
+						<label>How many adults live in your house</label>
+						<div class="field-container w-helper">
+							<div validate ng-model="update.client_detail_no_of_adults" select-application-group="client_detail_no_of_adults" required  section="about_you"></div>
+							<a ng-click="showHelperMessage()" class="field-helper">?</a>
+						</div>
+						<div class="helper-message" ng-if="helperMessage.active">The number of people 18 years of age or older living in your house</div>
+						<div class="field-errors" show-error-message></div>
+					</div>
+					<div class="form-group" id="group-dependants" show-helper ng-if="updateFields.client_detail_no_of_dependants">
+						<label>Number of dependants</label>
+						<div class="field-container w-helper">
+							<div validate ng-model="update.client_detail_no_of_dependants" select-application-group="client_detail_no_of_dependants" required section="about_you"></div>
+							<a ng-click="showHelperMessage()" class="field-helper">?</a>
+						</div>
+						<div class="helper-message" ng-if="helperMessage.active">Dependants are your family or other people who rely on you for financial support</div>
+						<div class="field-errors" show-error-message></div>
+					</div>
+					<div class="form-group" id="group-outgoings" show-helper ng-if="updateFields.client_detail_home_mortgage_rent">
+						<label>Your monthly rent or mortgage</label>
+						<div class="field-container w-helper">
+							<div validate ng-model="update.client_detail_home_mortgage_rent" select-application-group="client_detail_home_mortgage_rent" required section="income"></div>
+							<a ng-click="showHelperMessage()" class="field-helper">?</a>
+						</div>
+						<div class="helper-message" ng-if="helperMessage.active">Choose the amount that is the closest match.</div>
+						<div class="field-errors" show-error-message></div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 block-center text-center">
+					<button ladda="updateLoading" class="submit-button btn-black" ng-click="updateClientFields(affordabilityQuestionsForm)"><span>Next</span><b>&gt;</b></button>
+				</div>
+			</div>
+		</form>
+	</div>
+</section>
+
+<div class="clear"></div>
+<section class="sec-borrow sec-eighty need-info">
+	<div class="container">
+		<div class="col12 text-center">
+			<h2 class="white">Need more info?</h2>
+			<h2 class="black">Call: 020 3006 2000</h2>
+		</div>
+	</div>
+</section>

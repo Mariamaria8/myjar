@@ -1,0 +1,21 @@
+<div class="remodal" remodal="modal" ng-model="application">
+	<h1>Change your number</h1>
+	<p>The mobile number we currently have for you is <strong>[[application.client_username]]</strong>. If that's not right, enter your correct number below and we will send your PIN again.</p>
+	<br>
+	<form name="changeUsernameForm" id="change-mobile-form" class="form-modal" novalidate>
+		<div class="form-group col-sm-10 block-center" id="group-pin">
+			<div class="row">
+				<div class="field-container col-sm-6">
+					<input validate type="text" ng-model="updateData.client_username" name="update_username" class="form-control" placeholder="Your mobile number" required>
+				</div>
+				<div class="field-container col-sm-6">
+					<button type="submit" id="check-pin" form-submitter ng-click="submitModalForm(changeUsernameForm, 'change')" class="btn-submit"><span>Change number</span></button>
+				</div>
+			</div>
+			<div class="field-errors" show-error-message>
+				<div class="field-error" data-input-name="update_username" ng-if="fieldError.update_username">[[fieldError.update_username]]</div>
+				<div class="field-success" data-input-name="update_username" ng-if="fieldSuccess.update_username">[[fieldSuccess.update_username]]</div>
+			</div>
+		</div>
+	</form>
+</div>
