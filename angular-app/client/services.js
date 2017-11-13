@@ -29,7 +29,19 @@ angular.module('client.services', []).
 			},
 			getLoanData: function() {
 				return loanData.requestInfo
-			}
+			},
+
+			/*Return response data from backend*/
+            getRequestData : function () {
+                return $http({
+                    method: "get",
+                    url: "http://localhost:8080/api/response_data"
+                }).then(function(response) {
+                    response = response.data;
+                    return response;
+                }
+                );
+            }
 		}
 	}]).
 

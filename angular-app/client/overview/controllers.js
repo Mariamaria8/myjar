@@ -17,7 +17,7 @@ angular.module('client.overview.controllers', []).
 
 			$scope.selectedProduct = '3month';
 
-			$scope.creditLimitObj = $scope.productData[$scope.selectedProduct];
+			$scope.creditLimitObj = $scope.productData[0][$scope.selectedProduct];
 
 			// Check if credit limit has only one value. Default is 100
 			$scope.CLisMin = $scope.creditLimitObj[1].lower == $scope.creditLimitObj[Object.keys($scope.creditLimitObj).length].upper;
