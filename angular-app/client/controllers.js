@@ -11,7 +11,7 @@ angular.module('client.controllers', [
 	controller('ClientController',
 		['$scope', 'clientFactory', 'loanFactory', '$q', function($scope, clientFactory, loanFactory, $q) {
 
-	    /*Init requested data*/
+	    /*Init data*/
             var deferred = $q.defer();
             $scope.getResponseData = function() {
                 var getData = function(){

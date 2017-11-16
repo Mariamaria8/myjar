@@ -20,9 +20,9 @@ angular.module('client.overview.directives', []).
 		].join('');
 
 		var daySlider = [
-			'<h2 class="large">[[sliderDayValue]] Days</h2>',
-			'<p>Loan due date: <strong>[[earlierPaymentDate | instalmentDateFormat]]</strong></p>',
-			'<div class="slider-container">',
+			'<h2 class="large"><span ng-show="tabContent.id == 1">[[sliderDayValue]] Days</span><span ng-show="tabContent.id > 1">[[tabContent.id.toString()]] Months</span></h2>',
+			'<p>Loan due date: <strong ng-show="tabContent.id == 1">[[earlierPaymentDate | instalmentDateFormat]]</strong><strong ng-show="tabContent.id > 1">[[loanDurationFixed | instalmentDateFormat]]</strong></p>',
+			'<div class="slider-container" ng-show="tabContent.id == 1">',
 				'<span class="decrease" ng-click="decreaseValue(1)">-</span><span class="increase" ng-click="increaseValue(1)">+</span>',
 				'<input type="range" min="1" max="[[loanDuration]]" value="" step="1">',
 				'<span class="pull-left minmax">1 Day</span>',
@@ -97,6 +97,10 @@ angular.module('client.overview.directives', []).
 
 					if(attrs.slider == 'pound') {
 						var limits = $scope.creditLimitObj[newVal];
+						// Change the credit limit for period 2 and 3 months, if selectedProduct changed from 1 product to 2 or 3.
+						if($scope.tabContent != 1){
+							limits = $scope.tabContent.creditLimitObj[$scope.loanDuration];
+						}
 
 						if(!_.isUndefined(limits)) {
 

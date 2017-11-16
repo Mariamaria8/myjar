@@ -10,29 +10,11 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-12">
-				<div class="request-body">
-					<div class="row">
-						<div class="col-md-6">
-							<!-- Vantage request left body -->
-							<div ng-include src="'/myjar/angular-app/client/overview/sections/vantage/request/borrow_body.html'"></div>
-						</div>
-						<div class="col-md-6">
-							<div class="schedule-body">
-								<div class="schedule-container">
-									<h2>Payment schedule</h2>
-									<!-- Vantage request right body instalments -->
-									<div class="instalment-container" ng-include src="'/myjar/angular-app/client/overview/sections/vantage/request/instalment_container.html'"></div>
-
-									<div class="borrow-container text-center" style="text-align: center;">
-										<p>Borrow <strong>[[loanRequestInfo.principal | currency:"£"]]</strong> Interest <strong>[[loanRequestInfo.interest | currency:"£"]]</strong></p>
-										<p><strong>Total to repay: [[loanRequestInfo.total() | currency:"£"]]</strong></p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+			<div class="col-md-12" ng-include src="'/myjar/angular-app/client/overview/tabs/tabNav.html'"></div>
+		</div>
+		<div class="tab-content">
+			<div>
+				<div class="col-md-12" ng-include src="'/myjar/angular-app/client/overview/tabs/tabContent.html'"></div>
 			</div>
 		</div>
 	</div>

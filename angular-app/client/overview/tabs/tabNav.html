@@ -1,0 +1,7 @@
+<ul class="tab nav nav-tabs">
+    <div class="col-md-4 request-tab tab[[$index + 1]]" ng-class="(selected == $index ? 'active' : '') + ' ' + ($index == 1 ? 'green-tab-content' : ($index == 2 ? 'yellow-tab-content' : ''))" ng-repeat="product in productData">
+        <li>
+            <a href ng-click="setTabContent([[$index + 1]])">[[product.product_name]] - [[product.interest_per_day]]</a>
+        </li>
+    </div>
+</ul>

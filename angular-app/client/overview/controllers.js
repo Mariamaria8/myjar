@@ -7,24 +7,58 @@ angular.module('client.overview.controllers', []).
 	controller('ClientOverviewController',
 		['$scope', '$rootScope', 'loanFactory', 'ModalService', function($scope, $rootScope, loanFactory, ModalService) {
 
+			var defaultIndex = 1;
+			$scope.selected = defaultIndex;
 
 			$scope.creditLimit = $scope.loanRequestData.data.loan_request.credit_limit;
-			$scope.loanDuration = moment($scope.loanRequestData.data.loan_request.maximum_duration_date, "YYYY-MM-DD").diff(moment().startOf('day'), 'days');
 			$scope.nextIncomeDate = $scope.loanRequestData.data.next_income_date;
 			$scope.productData = JSON.parse($scope.loanRequestData.data.loan_request.limits_per_duration_json);
+            $scope.loanDuration = moment($scope.productData[defaultIndex - 1].maximum_duration_date, "YYYY-MM-DD").diff(moment().startOf('day'), 'days');
+			$scope.selectedProduct = defaultIndex+'month';
+			$scope.tab = defaultIndex;
+
+			//Set default data
+            $scope.tabContent = {
+                id: $scope.tab,
+                productName: $scope.productData[defaultIndex - 1].product_name,
+                interestPerDay: $scope.productData[defaultIndex - 1].interest_per_day,
+				selectedProductKey: Object.keys($scope.productData[defaultIndex - 1])[3],
+				creditLimitObj : $scope.productData[defaultIndex - 1][Object.keys($scope.productData[defaultIndex - 1])[3]],
+				selected : $scope.selected
+            };
+
+            //Sets tab contents data
+            $scope.setTabContent = function(newTab){
+                $scope.tab = newTab;
+                $scope.tabContent.id = newTab;
+                $scope.tabContent.productName = $scope.productData[$scope.tab - 1].product_name;
+                $scope.tabContent.interestPerDay = $scope.productData[$scope.tab - 1].interest_per_day;
+                $scope.tabContent.selectedProductKey = Object.keys($scope.productData[$scope.tab - 1])[3];
+                $scope.tabContent.creditLimitObj = $scope.productData[$scope.tab - 1][Object.keys($scope.productData[$scope.tab - 1])[3]];
+                $scope.loanDuration = moment($scope.productData[$scope.tabContent.id - 1].maximum_duration_date, "YYYY-MM-DD").diff(moment().startOf('day'), 'days');
+                $scope.selectedProduct = $scope.tabContent.selectedProductKey;
+                $scope.selected = $scope.tabContent.id - 1;
+            };
+
 			$scope.instalments = [],
 			$scope.loanRequestInfo = {};
 
-			$scope.selectedProduct = '3month';
+            $scope.$watch('selectedProduct', function (newVal, oldVal) {
+                $scope.selectedProduct = newVal;
+                $scope.loanDuration = moment($scope.productData[$scope.tab - 1].maximum_duration_date, "YYYY-MM-DD").diff(moment().startOf('day'), 'days');
+                $scope.loanDurationFixed = $scope.productData[$scope.tab - 1].maximum_duration_date;
+                $scope.creditLimitObj = $scope.productData[$scope.tab - 1][newVal];
 
-			$scope.creditLimitObj = $scope.productData[0][$scope.selectedProduct];
+                // Check if credit limit has only one value. Default is 100
+                $scope.CLisMin = $scope.creditLimitObj[1].lower == $scope.creditLimitObj[Object.keys($scope.creditLimitObj).length].upper;
+                $scope.CLisMinValue = $scope.creditLimitObj[1].lower;
 
-			// Check if credit limit has only one value. Default is 100
-			$scope.CLisMin = $scope.creditLimitObj[1].lower == $scope.creditLimitObj[Object.keys($scope.creditLimitObj).length].upper;
-			$scope.CLisMinValue = $scope.creditLimitObj[1].lower;
+                // Set default credit low limit
+                $scope.creditLow = $scope.CLisMinValue;
 
-			// Set default credit low limit
-			$scope.creditLow = $scope.CLisMinValue;
+                $scope.sliderDayValue = $scope.loanDuration;
+                $scope.selected = $scope.tab - 1;
+            });
 
 			$scope.sliderValue = {
 				pound: null,
